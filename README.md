@@ -132,5 +132,5 @@ Khách hàng thường sử dụng các yếu tố đối tượng nào trong qu
 - Phần lớn khách hàng đến từ **các chiến dịch khuyến mãi**, tuy nhiên **tỷ lệ quay lại thấp**, chủ yếu chỉ đặt **một lần duy nhất**.
 
 
----
+
 
