@@ -136,4 +136,5 @@ Cảm ơn bạn đã dành thời gian xem dự án của tôi!
 Nếu bạn quan tâm, muốn hợp tác trong các dự án hoặc có cơ hội việc làm phù hợp, tôi luôn sẵn sàng trao đổi.  
 
 📧 Email: hoangquockhanhxinchao@gmail.com  
-🔗 LinkedIn: linkedin.com/in/khánh-hoàng-11a689247
+🔗 LinkedIn: [linkedin.com/in/khánh-hoàng-11a689247](https://www.linkedin.com/in/kh%C3%A1nh-ho%C3%A0ng-11a689247/)
+
