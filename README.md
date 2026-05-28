@@ -5,6 +5,24 @@
 Dự án này phân tích **hành vi đặt vé xem phim trực tuyến** của khách hàng trong giai đoạn **2019–2022**.  
 Với vai trò là **Nhà phân tích dữ liệu** trong bộ phận phát triển sản phẩm của **Kompany**, mục tiêu của dự án là cung cấp các **thông tin chi tiết (insights)** về hành vi người dùng và **đề xuất chiến lược cải thiện** để tăng trưởng doanh số cũng như giữ chân khách hàng.
 
+## 2. Kiến trúc hệ thống (System Architecture)
+
+Cấu trúc thư mục của dự án như sau:
+
+```
+project/
+├── images/                          # Lưu trữ hình ảnh, biểu đồ, visual hóa phân tích
+├── movie_ticket_data/               # Thư mục dữ liệu gốc
+│   ├── campaign.csv                 # Dữ liệu các chiến dịch marketing/khuyến mãi
+│   ├── customer.csv                 # Dữ liệu khách hàng (mã, giới tính, năm sinh)
+│   ├── device_detail.csv            # Dữ liệu thiết bị đặt vé (model, nền tảng)
+│   ├── status_detail.csv            # Trạng thái giao dịch (ID, mô tả, nhóm lỗi)
+│   └── ticket_history.csv           # Lịch sử giao dịch đặt vé (chi tiết phương thức, phim, khuyến mãi...)
+├── notebooks/                       # Notebook phân tích dữ liệu, kiểm thử, xử lý trực quan hóa
+│   └── file analyst.ipynb           # Notebook chính: load, xử lý, cleaning & visualize dữ liệu
+├── reports/                         # Báo cáo tổng kết insights, kết quả và quy trình phân tích
+└── README.md                        # Tài liệu mô tả & hướng dẫn dự án
+```
 
 
 ## Mục tiêu
