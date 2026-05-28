@@ -5,7 +5,7 @@
 Dự án này phân tích **hành vi đặt vé xem phim trực tuyến** của khách hàng trong giai đoạn **2019–2022**.  
 Với vai trò là **Nhà phân tích dữ liệu** trong bộ phận phát triển sản phẩm của **Kompany**, mục tiêu của dự án là cung cấp các **thông tin chi tiết (insights)** về hành vi người dùng và **đề xuất chiến lược cải thiện** để tăng trưởng doanh số cũng như giữ chân khách hàng.
 
-## 2. Kiến trúc hệ thống (System Architecture)
+##  Kiến trúc hệ thống (System Architecture)
 
 Cấu trúc thư mục của dự án như sau:
 
