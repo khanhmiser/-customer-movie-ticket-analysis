@@ -20,7 +20,6 @@ project/
 │   └── ticket_history.csv           # Lịch sử giao dịch đặt vé (chi tiết phương thức, phim, khuyến mãi...)
 ├── notebooks/                       # Notebook phân tích dữ liệu, kiểm thử, xử lý trực quan hóa
 │   └── file analyst.ipynb           # Notebook chính: load, xử lý, cleaning & visualize dữ liệu
-├── reports/                         # Báo cáo tổng kết insights, kết quả và quy trình phân tích
 └── README.md                        # Tài liệu mô tả & hướng dẫn dự án
 ```
 
@@ -149,10 +148,11 @@ Khách hàng thường sử dụng các yếu tố đối tượng nào trong qu
 - **89% khách hàng** đặt vé qua **ứng dụng di động**, trong đó **55% sử dụng hệ điều hành iOS**.  
 - Phần lớn khách hàng đến từ **các chiến dịch khuyến mãi**, tuy nhiên **tỷ lệ quay lại thấp**, chủ yếu chỉ đặt **một lần duy nhất**.
 
+## Report
+| **Phân tích hành vi vé xem phim online (2019–2022)** | Báo cáo chi tiết định dạng PDF | [Xem Báo Cáo](https://drive.google.com/file/d/1otfwKdD6RAmi8OEXXZN9hLMmzyoGo0Mo/view?usp=sharing) |
 
 Cảm ơn bạn đã dành thời gian xem dự án của tôi!  
 Nếu bạn quan tâm, muốn hợp tác trong các dự án hoặc có cơ hội việc làm phù hợp, tôi luôn sẵn sàng trao đổi.  
 
-📧 Email: hoangquockhanh2626@gmail.com\
-🔗 LinkedIn: [linkedin.com/in/khánh-hoàng-11a689247](https://www.linkedin.com/in/kh%C3%A1nh-ho%C3%A0ng-11a689247/)
+
 
