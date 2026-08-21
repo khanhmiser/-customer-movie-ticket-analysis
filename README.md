@@ -1,158 +1,144 @@
-# Phân Tích Dữ Liệu Đặt Vé Xem Phim Trực Tuyến (2019–2022)
+# Online Movie Ticket Booking Data Analysis (2019–2022)
 
-##  Giới thiệu
+## Introduction
 
-Dự án này phân tích **hành vi đặt vé xem phim trực tuyến** của khách hàng trong giai đoạn **2019–2022**.  
-Với vai trò là **Nhà phân tích dữ liệu** trong bộ phận phát triển sản phẩm của **Kompany**, mục tiêu của dự án là cung cấp các **thông tin chi tiết (insights)** về hành vi người dùng và **đề xuất chiến lược cải thiện** để tăng trưởng doanh số cũng như giữ chân khách hàng.
+This project analyzes **customer online movie ticket booking behavior** during **2019–2022**.  
+As a **Data Analyst** on the product development team at **Kompany**, the goal of the project is to provide actionable **insights** [...]
 
-##  Kiến trúc hệ thống (System Architecture)
+## System Architecture
 
-Cấu trúc thư mục của dự án như sau:
+The project directory structure is as follows:
 
 ```
 project/
-├── images/                          # Lưu trữ hình ảnh, biểu đồ, visual hóa phân tích
-├── movie_ticket_data/               # Thư mục dữ liệu gốc
-│   ├── campaign.csv                 # Dữ liệu các chiến dịch marketing/khuyến mãi
-│   ├── customer.csv                 # Dữ liệu khách hàng (mã, giới tính, năm sinh)
-│   ├── device_detail.csv            # Dữ liệu thiết bị đặt vé (model, nền tảng)
-│   ├── status_detail.csv            # Trạng thái giao dịch (ID, mô tả, nhóm lỗi)
-│   └── ticket_history.csv           # Lịch sử giao dịch đặt vé (chi tiết phương thức, phim, khuyến mãi...)
-├── notebooks/                       # Notebook phân tích dữ liệu, kiểm thử, xử lý trực quan hóa
-│   └── file analyst.ipynb           # Notebook chính: load, xử lý, cleaning & visualize dữ liệu
-└── README.md                        # Tài liệu mô tả & hướng dẫn dự án
+├── images/                          # Stores images, charts, and analysis visualizations
+├── movie_ticket_data/               # Raw data directory
+│   ├── campaign.csv                 # Marketing/promotion campaign data
+│   ├── customer.csv                 # Customer data (ID, gender, year of birth)
+│   ├── device_detail.csv            # Device data used for booking (model, platform)
+│   ├── status_detail.csv            # Transaction status (ID, description, error group)
+│   └── ticket_history.csv           # Booking transaction history (payment details, movie, promotions...)
+├── notebooks/                       # Analysis notebooks, tests, processing and visualization
+│   └── file analyst.ipynb           # Main notebook: load, process, clean & visualize data
+└── README.md                        # Project description & instructions
 ```
 
+## Objectives
 
-## Mục tiêu
+- Understand customer behavior for online movie ticket booking over the past four years.  
+- Provide **specific recommendations** to improve user experience and booking success rates.
 
-- Hiểu rõ hành vi của khách hàng khi đặt vé xem phim online trong 4 năm gần đây.  
-- Đưa ra **đề xuất cụ thể** nhằm nâng cao trải nghiệm và tỷ lệ đặt vé thành công.
+## Problem definition
 
+**Who (Target audience):**  
+- **Internal:** Departments directly related to the booking process (Customer Service, Sales).  
+- **External:** Who are the customers?  
+  • Location: in Vietnam / abroad; region (urban, rural, province).  
+  • Customer profile level: new customers, returning customers, verified-account customers.  
+  • Demographics: gender, age, marital status, education (if available).
 
+**What to analyze:**  
+- Booking behavior through **website** and **mobile app**.
 
-## Xác định vấn đề
+**When:**  
+- Popular booking times: **year, month, day, hour, holidays, weekends, new movie releases**.
 
-**Đối tượng phân tích (Who):**  
-- **Nội bộ:** : Các bộ phận liên quan trực tiếp đến quá trình đặt vé của người sử dụng(Dịch vụ khách hàng,bán hàng).
-- **Bên ngoài:** : Khách hàng là ai?
-                  •	Location: ở việt nam/ nước ngoài,khu vực(Thành thị,nông thôn,tỉnh thành).
-                  •	Profile Level của khách hàng,khách hàng mới,khách hàng cũ,khách hàng có xác thực tài khoản.
-                  •	Demographic: Gới tính,độ tuổi,trình trạng hôn nhân,học vấn(nếu có)
+**Which factors:**  
+What elements do customers typically interact with during online booking?
+- Product: movie tickets.
+- Booking device: website & app.
+- Payment methods: various payment sources (in-app wallet, linked banks).
+- Gifts, promotions, campaigns.
 
-**Phân tích cái gì (What):**  
-- Hành vi đặt vé xem phim thông qua **website** và **ứng dụng di động (app)**.  
+**How:**  
+- Analyze customer experience, retention rates, step-level funnel performance.
 
-**Khi nào (When):**  
-- Thời điểm đặt vé phổ biến: **năm, tháng, ngày, giờ, dịp lễ, cuối tuần, thời điểm ra mắt phim mới**.
+## Analysis process
 
-**Những thứ gì (Which):**
-Khách hàng thường sử dụng các yếu tố đối tượng nào trong quá trình đặt phim online?
--	Sản phẩm: vé xem phim.
--	Thiết bị mua vé: website & app.
--	Phương thức thanh toán: các loại nguồn tiền (trong app, ngân hàng liên kết).
--	Quà tặng, chương trình khuyến mãi.
-
-**Cách thức (How):**  
-- Phân tích trải nghiệm khách hàng, tỷ lệ giữ chân, hiệu suất các bước trong quy trình đặt vé.
-
-
-
-## Quy trình phân tích
-
-1. **Load Data:** Nạp và kiểm tra dữ liệu gốc.  
-2. **Data Cleaning:** Xử lý kiểu dữ liệu, giá trị null, trùng lặp và gộp các bảng liên quan.  
+1. **Load Data:** Load and inspect raw data.  
+2. **Data Cleaning:** Handle data types, nulls, duplicates, and join related tables.  
 3. **Analyze:**  
-   - Khắc họa **chân dung khách hàng** (độ tuổi, giới tính).  
-   - Phân tích **xu hướng đặt vé theo thời gian** (tháng, tuần, giờ).  
-   - Đánh giá **các yếu tố ảnh hưởng đến hành vi mua và thanh toán** (nền tảng, thiết bị, phương thức, khuyến mãi, loại phim).  
-   - Phân tích **giá trị và hành vi khách hàng**, **giữ chân (Cohort Analysis)**, và **tỷ lệ thanh toán thành công**.  
-4. **Visualization & Insights:** Trực quan hóa dữ liệu, rút ra xu hướng và đề xuất hành động.
+   - Build **customer profiles** (age, gender).  
+   - Analyze **booking trends over time** (month, week, hour).  
+   - Evaluate **factors affecting purchase and payment behavior** (platform, device, method, promotions, movie type).  
+   - Analyze **customer value and behavior**, **cohort retention**, and **payment success rates**.  
+4. **Visualization & Insights:** Visualize data, extract trends, and recommend actions.
 
+## Dataset information
 
+- **Source:** Online movie ticket booking system.  
+- **Time range:** 2019–2022  
+- **Format:** `.csv`  
+- **Total:** 5 data tables
 
-## Thông tin bộ dữ liệu
-
-- **Nguồn:** Hệ thống đặt vé xem phim trực tuyến .  
-- **Thời gian:** 2019–2022  
-- **Định dạng:** `.csv`  
-- **Tổng cộng:** 5 bảng dữ liệu
-
-### 1️ `customer.csv` — Thông tin khách hàng
-| Thuộc tính | Mô tả |
-|-------------|-------|
-| `customer_ID` | Mã định danh duy nhất của mỗi khách hàng. |
-| `usergender` | Giới tính của khách hàng. |
-| `dob` | Năm sinh của khách hàng. |
+### 1️ `customer.csv` — Customer information
+| Attribute | Description |
+|-------------|-------------|
+| `customer_ID` | Unique identifier for each customer. |
+| `usergender` | Customer gender. |
+| `dob` | Customer year of birth. |
 
 ---
 
-### 2️ `ticket_history.csv` — Lịch sử đặt vé
-| Thuộc tính | Mô tả |
-|-------------|-------|
-| `ticket_id` | Mã đặt vé duy nhất cho mỗi giao dịch. |
-| `customer_id` | Mã khách hàng thực hiện giao dịch. |
-| `paying_method` | Hình thức thanh toán được sử dụng (ví dụ: **money in app**, **bank account**, **debit card**). |
-| `theater_name` | Mã hoặc tên cụm rạp nơi khách hàng đặt vé. |
-| `device_number` | Mã thiết bị được sử dụng để đặt vé, liên kết với bảng `device_detail.csv`. |
-| `original_price` | Giá gốc của vé trước khi áp dụng khuyến mãi (đơn vị: VND). |
-| `discount_value` | Giá trị giảm giá hoặc khuyến mãi được áp dụng. |
-| `final_price` | Số tiền thực tế khách hàng phải trả sau khi giảm giá. |
-| `time` | Thời điểm đặt vé (định dạng giờ:phút.giây). |
-| `status_id` | Mã trạng thái giao dịch, liên kết với bảng `status_detail.csv` (ví dụ: thành công, thất bại, lỗi hệ thống). |
-| `campaign_id` | Mã chiến dịch marketing áp dụng cho đơn đặt vé (liên kết với `campaign.csv`). |
-| `movie_name` | Tên bộ phim mà khách hàng đặt vé. |
+### 2️ `ticket_history.csv` — Booking history
+| Attribute | Description |
+|-------------|-------------|
+| `ticket_id` | Unique booking ID for each transaction. |
+| `customer_id` | Customer ID who made the transaction. |
+| `paying_method` | Payment method used (e.g., **money in app**, **bank account**, **debit card**). |
+| `theater_name` | Code or name of the theater complex where the booking was made. |
+| `device_number` | Device ID used for booking, linked to `device_detail.csv`. |
+| `original_price` | Original ticket price before applying promotions (unit: VND). |
+| `discount_value` | Discount or promotion value applied. |
+| `final_price` | Actual amount the customer paid after discount. |
+| `time` | Booking timestamp (format: hh:mm:ss). |
+| `status_id` | Transaction status ID, linked to `status_detail.csv` (e.g., success, failure, system error). |
+| `campaign_id` | Marketing campaign ID applied to the booking (linked to `campaign.csv`). |
+| `movie_name` | Name of the movie booked. |
 
 ---
 
-### 3️ `device_detail.csv` — Thông tin thiết bị
-| Thuộc tính | Mô tả |
-|-------------|-------|
-| `device_number` | Mã định danh thiết bị duy nhất. |
-| `model` | Tên hoặc mã thiết bị cụ thể. |
-| `platform` | Nền tảng hoặc kênh sử dụng để đặt vé — gồm **mobile** (thiết bị di động) và **website** (trình duyệt web).  |
+### 3️ `device_detail.csv` — Device information
+| Attribute | Description |
+|-------------|-------------|
+| `device_number` | Unique device identifier. |
+| `model` | Specific device name or code. |
+| `platform` | Platform or channel used to book — includes **mobile** (mobile devices) and **website** (web browser). |
 
 ---
 
-### 4️ `campaign.csv` — Chiến dịch marketing
-| Thuộc tính | Mô tả |
-|-------------|-------|
-| `campaign_id` | Mã chiến dịch khuyến mãi. |
-| `campaign_type` | Loại của chiến dịch tiếp thị. |
+### 4️ `campaign.csv` — Marketing campaigns
+| Attribute | Description |
+|-------------|-------------|
+| `campaign_id` | Promotion campaign ID. |
+| `campaign_type` | Type of marketing campaign. |
 
 ---
 
-### 5️ `status_detail.csv` — Trạng thái giao dịch
-| Thuộc tính | Mô tả |
-|-------------|-------|
-| `status_id` | Mã định danh trạng thái giao dịch. |
-| `description` | Mô tả chi tiết về trạng thái hoặc lỗi xảy ra trong quá trình thanh toán. |
-| `error_group` | Nhóm nguyên nhân lỗi chính, phân loại theo nguồn gốc: **customer** (lỗi phía khách hàng), **external** (lỗi từ ngân hàng hoặc bên thứ ba), và **internal** (lỗi nội bộ hệ thống). |
+### 5️ `status_detail.csv` — Transaction status
+| Attribute | Description |
+|-------------|-------------|
+| `status_id` | Transaction status identifier. |
+| `description` | Detailed description of the status or error that occurred during payment. |
+| `error_group` | Main error group, categorized by origin: **customer** (customer-side error), **external** (bank or third-party error), and **internal** [...].
 
+## Tools and libraries used
 
+- **Language:** Python  
+- **Libraries:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `plotly`, `datetime`  
+- **Tool:** Jupyter Notebook  
+- **Version control:** GitHub
 
-## Công cụ và thư viện sử dụng
+## Key findings
 
-- **Ngôn ngữ:** Python  
-- **Thư viện:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `plotly`, `Datetime`
-- **Công cụ:** Jupyter Notebook  
-- **Quản lý mã nguồn:** GitHub  
-
-
-
-##  Một số kết quả nổi bật
-
-- **75% khách hàng** nằm trong độ tuổi **26–35**, nhóm có thu nhập ổn định và thói quen giải trí thường xuyên.  
-- **Hai mùa cao điểm** đặt vé diễn ra vào **tháng 5–7** (mùa hè) và **tháng 10–12** (mùa phim cuối năm).  
-- **Doanh số cuối tuần** cao gấp **1,5 lần** so với các ngày trong tuần (thứ 2–5).  
-- **89% khách hàng** đặt vé qua **ứng dụng di động**, trong đó **55% sử dụng hệ điều hành iOS**.  
-- Phần lớn khách hàng đến từ **các chiến dịch khuyến mãi**, tuy nhiên **tỷ lệ quay lại thấp**, chủ yếu chỉ đặt **một lần duy nhất**.
+- **75% of customers** are aged **26–35**, a group with stable income and regular entertainment habits.  
+- **Two peak seasons** for bookings occur in **May–July** (summer) and **October–December** (year-end releases).  
+- **Weekend sales** are **1.5 times** higher than on weekdays (Monday–Thursday).  
+- **89% of customers** book via the **mobile app**, of which **55% use iOS**.  
+- Most customers come from **promotional campaigns**, however **the repeat rate is low**, mostly only booking **once**.
 
 ## Report
-| **Phân tích hành vi vé xem phim online (2019–2022)** | Báo cáo chi tiết định dạng PDF | [Xem Báo Cáo](https://drive.google.com/file/d/1otfwKdD6RAmi8OEXXZN9hLMmzyoGo0Mo/view?usp=sharing) |
+| **Online movie ticket booking behavior analysis (2019–2022)** | Detailed report in PDF format | [View Report](https://drive.google.com/file/d/1otfwKdD6RAmi8OEXXZN9hLMmzyoGo0Mo/view?usp=shar[...] )
 
-Cảm ơn bạn đã dành thời gian xem dự án của tôi!  
-Nếu bạn quan tâm, muốn hợp tác trong các dự án hoặc có cơ hội việc làm phù hợp, tôi luôn sẵn sàng trao đổi.  
-
-
-
+Thank you for taking the time to review my project!  
+If you are interested, want to collaborate on projects, or have job opportunities that fit, I am always open to discussing them.
